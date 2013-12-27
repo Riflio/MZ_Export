@@ -68,7 +68,8 @@ class MZ_export {
  		//--        
  		$zip = new ZipArchive();        
  		$filename = "mzexport-".date("Ymd").".zip";
- 		$filepath= $updir["basedir"]."/".$filename;
+ 		$filepath= $updir['basedir']."/".$filename;
+ 		echo $filepath;
  		if ($zip->open($filepath, ZIPARCHIVE::CREATE)!==TRUE) {            
  			exit("Cannot create <{$filepath}>\n");        
  		}        
