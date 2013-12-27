@@ -72,7 +72,7 @@ class MZ_export {
  		$filepath= $updir['basedir']."/".$filename;
  		
  		if ($zip->open($filepath, ZIPARCHIVE::CREATE)!==TRUE) {            
- 			exit("Cannot create {$filepath} \n");        
+ 			die("Cannot create {$filepath} \n");        
  		}        
  		$menu_items = wp_get_nav_menu_items("mainMenu", array('output'=> OBJECT ) );       
  		$imgIndx=0;        
@@ -122,7 +122,8 @@ class MZ_export {
  				foreach($lotMO as $mo) {
  					$lot->addChild($mo->optName, $Meta->getMetaValue($post, $mo->optName) );	
  				}
- 				
+ 				echo 'STEP';
+ 				var_dump($post);echo "<br>";
  				$lot->addChild("images")->addChild("img", "qrc:/LOTS/".$imgName);            
  			}            
  			wp_reset_postdata(); 
