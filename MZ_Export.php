@@ -1,5 +1,6 @@
 <?php
-/*Plugin Name: wp_mz_exportimport plugin 
+/*
+Plugin Name: MZ_Export
 URI: http://pavelk.ru/portfolio/MZ_Export
 Description: generate xml file for export and import
 Version: 0.1
