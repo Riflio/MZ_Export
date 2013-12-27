@@ -1,8 +1,14 @@
 jQuery(document).ready(function($) {
 
 
-	$('#startexport').bind('click', function() {
-		exportAction({'step':0, 'total': 10 });
+	$('#exportaction').bind('click', function() {
+		if ($(this).hasClass("start")) {
+			exportAction({'step':0, 'total': 10 });
+		}
+		if ($(this).hasClass("download")) {
+			var a = window.open($(this).attr("href"), "_blank", "");	
+		}	
+		return false;
 	});
 
 	function exportAction(exp) {
@@ -25,7 +31,10 @@ jQuery(document).ready(function($) {
 
 					if (data.step>=data.total) {
 						alert("Result: "+data.resultpath);
-						var a = window.open(data.resultpath, "_blank", "");	
+						$('#exportaction').removeClass("start");
+						$('#exportaction').addClass("download");
+						$('#exportaction').attr("href", data.resultpath);
+						$('#exportaction').text("Download");
 					}
 				}	
 		});

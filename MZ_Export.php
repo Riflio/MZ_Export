@@ -36,7 +36,7 @@ class MZ_export {
 
 				</div>
 				<div>
-					<a id="startexport" class="button" href="javascript:;">'.__('Start export').'</a>
+					<a id="exportaction" class="button start" href="javascript:;">'.__('Start export').'</a>
 					<div class="media-item">
 						<div class="progress" style="float:left; width:100%">
 							<div class="percent">0</div>
@@ -127,7 +127,7 @@ class MZ_export {
  			}            
  			wp_reset_postdata(); 
  		}        
- 		$zip->addFromString("data.xml". time(),  $xml->asXML());        
+ 		$zip->addFromString("data.xml",  $xml->asXML());        
  		$zip->close();
  		
  		$export->status="SUCCES";
