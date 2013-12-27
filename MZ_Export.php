@@ -58,6 +58,8 @@ class MZ_export {
 		global $Maginza;
  		$_export=urldecode($_GET['export']);		
 		$export  = json_decode($_export);	
+		
+		$Meta=new Meta();
 
  		$xml = new SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><root></root>');        
  		$xMenu=$xml->addChild("menu");        
@@ -100,7 +102,7 @@ class MZ_export {
  				$imgIndx++;				
  				$the_query->the_post();		
  						
- 				$lotMO=$Maginza->getLotMetaOptions($post);                
+ 				$lotMO=$Meta->getLotMetaOptions($post);                
  				//--                
  				$pti=get_post_thumbnail_id($post->ID);                
  				$md=wp_get_attachment_metadata($pti);                
@@ -118,7 +120,7 @@ class MZ_export {
  				$lot->addChild("title", "<![CDATA[".$title."]]>");               	
  				
  				foreach($lotMO as $mo) {
- 					$lot->addChild($mo->optName, $Maginza->getMetaValue($post, $mo->optName) );	
+ 					$lot->addChild($mo->optName, $Meta->getMetaValue($post, $mo->optName) );	
  				}
  				
  				$lot->addChild("images")->addChild("img", "qrc:/LOTS/".$imgName);            
