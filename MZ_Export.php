@@ -67,7 +67,7 @@ class MZ_export {
  		$updir=wp_upload_dir();
  		//--        
  		$zip = new ZipArchive();        
- 		$filename = "mzexport-".date("Ymd").".zip";
+ 		$filename = "mzexport-".date("Ymd")."zip";
  		$filepath= $updir['basedir']."/".$filename;
  		echo $filepath;
  		if ($zip->open($filepath, ZIPARCHIVE::CREATE)!==TRUE) {            
