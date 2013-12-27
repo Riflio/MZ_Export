@@ -66,12 +66,13 @@ class MZ_export {
  		//--        
  		$updir=wp_upload_dir();
  		//--        
- 		$zip = new ZipArchive();        
- 		$filename = "mzexport-".date("Ymd")."zip";
+ 		$zip = new ZipArchive();       
+ 		 
+ 		$filename = "mzexport-".date("Ymd").".zip";
  		$filepath= $updir['basedir']."/".$filename;
- 		echo $filepath;
+ 		
  		if ($zip->open($filepath, ZIPARCHIVE::CREATE)!==TRUE) {            
- 			exit("Cannot create <{$filepath}>\n");        
+ 			exit("Cannot create {$filepath} \n");        
  		}        
  		$menu_items = wp_get_nav_menu_items("mainMenu", array('output'=> OBJECT ) );       
  		$imgIndx=0;        
@@ -127,7 +128,7 @@ class MZ_export {
  			}            
  			wp_reset_postdata(); 
  		}        
- 		$zip->addFromString("data.xml",  $xml->asXML());        
+ 		$zip->addFromString("data.xml". time(),  $xml->asXML());        
  		$zip->close();
  		
  		$export->status="SUCCES";
