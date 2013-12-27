@@ -108,7 +108,7 @@ class MZ_export {
  				$sImg=$md["file"];                
  				//--                
  				$imgName="img".$imgIndx.".jpg";                
- 				$zip->addFile($updir.$sImg, $imgName);                
+ 				$zip->addFile($updir['basedir']."/".$sImg, $imgName);                
  				//--                
  				$lot=$xml->addChild('lot');                
  				$lot->addAttribute("gid", $keyIndx);                
@@ -122,8 +122,6 @@ class MZ_export {
  				foreach($lotMO as $mo) {
  					$lot->addChild($mo->optName, $Meta->getMetaValue($post, $mo->optName) );	
  				}
- 				echo 'STEP';
- 				var_dump($the_query->post);echo "<br>";
  				$lot->addChild("images")->addChild("img", "qrc:/LOTS/".$imgName);            
  			}            
  			wp_reset_postdata(); 
