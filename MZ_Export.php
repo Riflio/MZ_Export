@@ -128,7 +128,8 @@ class MZ_export {
  			wp_reset_postdata(); 
  		}        
  		$zip->addFromString("data.xml",  $xml->asXML());        
-
+ 		$zip->close();
+ 		
  		$export->status="SUCCES";
  		$export->step=10;
  		$export->total=10;
