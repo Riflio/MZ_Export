@@ -2,7 +2,7 @@
 /*
 Plugin Name: MZ_Export
 URI: http://pavelk.ru/portfolio/MZ_Export
-Description: generate xml file for export and import
+Description: generate xml file for export Maginza lots
 Version: 0.1
 Author:PavelK
 Author URI: http://pavelk.ru*/
@@ -55,7 +55,7 @@ class MZ_export {
 
 
  	function ajax_exportaction() {
-
+		global $Maginza;
  		$_export=urldecode($_GET['export']);		
 		$export  = json_decode($_export);	
 
@@ -98,8 +98,9 @@ class MZ_export {
  			//--            
  			while ( $the_query->have_posts()) {                
  				$imgIndx++;				
- 				$the_query->the_post();				
- 				$lotCm=Lot::getInstance()->the_cm();                
+ 				$the_query->the_post();		
+ 						
+ 				$lotMO=$Maginza->getLotMetaOptions($post);                
  				//--                
  				$pti=get_post_thumbnail_id($post->ID);                
  				$md=wp_get_attachment_metadata($pti);                
@@ -115,13 +116,16 @@ class MZ_export {
  				$descr=get_the_content();                
  				$lot->addChild("description", "<![CDATA[".$descr."]]>");				
  				$lot->addChild("title", "<![CDATA[".$title."]]>");               	
- 				$lot->addChild("price", $lotCm["price"]->meta_value);		
- 				$lot->addChild("article", $lotCm["article"]->meta_value);		
+ 				
+ 				foreach($lotMO as $mo) {
+ 					$lot->addChild($mo->optName, $Maginza->getMetaValue($post, $mo->optName) );	
+ 				}
+ 				
  				$lot->addChild("images")->addChild("img", "qrc:/LOTS/".$imgName);            
  			}            
  			wp_reset_postdata(); 
  		}        
- 		$zip->addFromString("data.xml" . time(),  $xml->asXML());        
+ 		$zip->addFromString("data.xml",  $xml->asXML());        
 
  		$export->status="SUCCES";
  		$export->step=10;
