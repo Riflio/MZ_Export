@@ -102,13 +102,14 @@ class MZ_export {
  			while ( $the_query->have_posts()) {                
  				$imgIndx++;	 				 
  				$the_query->next_post();
- 				//--                
- 				$pti=get_post_thumbnail_id($the_query->post->ID);                
- 				$md=wp_get_attachment_metadata($pti);                
- 				$sImg=$md["file"];                
- 				//--                
- 				$imgName="img".$imgIndx.".jpg";                
- 				$zip->addFile($updir['basedir']."/".$sImg, $imgName);                
+ 				//--         
+ 				if (has_post_thumbnail($the_query->post->ID)) {      
+	 				$pti=get_post_thumbnail_id($the_query->post->ID);                
+	 				$md=wp_get_attachment_metadata($pti);                
+	 				$sImg=$md["file"];
+	 				$imgName="img".$imgIndx.".jpg";                
+	 				$zip->addFile($updir['basedir']."/".$sImg, $imgName);
+ 				}                
  				//--                
  				$lot=$xml->addChild('lot');                
  				$lot->addAttribute("gid", $keyIndx);                
@@ -117,10 +118,12 @@ class MZ_export {
  				$descr=$the_query->post->post_content;            
  				$lot->addChild("description", "<![CDATA[".$descr."]]>");				
  				$lot->addChild("title", "<![CDATA[".$title."]]>");      
- 				//--          	
+ 				//--          
+ 				var_dump($the_query->post->ID); echo "<br>";
  				$lotMO=$Meta->getLotMetaOptions($the_query->post);
  				foreach($lotMO as $mo) {
  					$lot->addChild($mo->optName, $Meta->getMetaValue($post, $mo->optName) );	
+ 					var_dump($mo); echo "<br>";
  				}
  				$lot->addChild("images")->addChild("img", "qrc:/LOTS/".$imgName);            
  			}            
