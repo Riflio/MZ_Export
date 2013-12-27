@@ -100,10 +100,10 @@ class MZ_export {
  			));           
  			//--            
  			while ( $the_query->have_posts()) {                
- 				$imgIndx++;				
- 				$the_query->the_post();	 
+ 				$imgIndx++;	 				 
+ 				$the_query->next_post();
  				//--                
- 				$pti=get_post_thumbnail_id($post->ID);                
+ 				$pti=get_post_thumbnail_id($the_query->post->ID);                
  				$md=wp_get_attachment_metadata($pti);                
  				$sImg=$md["file"];                
  				//--                
@@ -113,17 +113,17 @@ class MZ_export {
  				$lot=$xml->addChild('lot');                
  				$lot->addAttribute("gid", $keyIndx);                
  				$lot->addChild("id", $imgIndx);               
- 				$title=get_the_title();												
- 				$descr=get_the_content();                
+ 				$title=$the_query->post->post_title;									
+ 				$descr=$the_query->post->post_content;            
  				$lot->addChild("description", "<![CDATA[".$descr."]]>");				
  				$lot->addChild("title", "<![CDATA[".$title."]]>");      
  				//--          	
- 				$lotMO=$Meta->getLotMetaOptions($post);
+ 				$lotMO=$Meta->getLotMetaOptions($the_query->post);
  				foreach($lotMO as $mo) {
  					$lot->addChild($mo->optName, $Meta->getMetaValue($post, $mo->optName) );	
  				}
  				echo 'STEP';
- 				var_dump($post);echo "<br>";
+ 				var_dump($the_query->post);echo "<br>";
  				$lot->addChild("images")->addChild("img", "qrc:/LOTS/".$imgName);            
  			}            
  			wp_reset_postdata(); 
