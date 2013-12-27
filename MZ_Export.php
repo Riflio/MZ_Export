@@ -101,9 +101,7 @@ class MZ_export {
  			//--            
  			while ( $the_query->have_posts()) {                
  				$imgIndx++;				
- 				$the_query->the_post();		
- 						
- 				$lotMO=$Meta->getLotMetaOptions($post);                
+ 				$the_query->the_post();	 
  				//--                
  				$pti=get_post_thumbnail_id($post->ID);                
  				$md=wp_get_attachment_metadata($pti);                
@@ -118,8 +116,9 @@ class MZ_export {
  				$title=get_the_title();												
  				$descr=get_the_content();                
  				$lot->addChild("description", "<![CDATA[".$descr."]]>");				
- 				$lot->addChild("title", "<![CDATA[".$title."]]>");               	
- 				
+ 				$lot->addChild("title", "<![CDATA[".$title."]]>");      
+ 				//--          	
+ 				$lotMO=$Meta->getLotMetaOptions($post);
  				foreach($lotMO as $mo) {
  					$lot->addChild($mo->optName, $Meta->getMetaValue($post, $mo->optName) );	
  				}
