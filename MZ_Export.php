@@ -103,7 +103,7 @@ class MZ_export {
  				$imgIndx++;	 				 
  				$the_query->next_post();
  				//--         
- 				if (has_post_thumbnail($the_query->post->ID) && 1==3) {      
+ 				if (has_post_thumbnail($the_query->post->ID)) {      
 	 				$pti=get_post_thumbnail_id($the_query->post->ID);                
 	 				$md=wp_get_attachment_metadata($pti);                
 	 				$sImg=$md["file"];
