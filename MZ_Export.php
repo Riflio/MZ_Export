@@ -114,15 +114,16 @@ class MZ_export {
  				$lot->addAttribute("gid", $keyIndx);                
  				$lot->addChild("id", $imgIndx);               
  				$title=$the_query->post->post_title;									
- 				$descr=$the_query->post->post_content;            
- 				$lot->addChild("description", "<![CDATA[".$descr."]]>");				
- 				$lot->addChild("title", "<![CDATA[".$title."]]>");      
+ 				$descr=$the_query->post->post_content;     
+ 				preg_match_all("([а-яА-Яa-zA-ZёЁ\d\s\.\-\(\)\?\!\\:,]+)", $descr, $descr); //-- берём только текст и нужные символы.       
+ 				$lot->addChild("description", $descr[0]);				
+ 				$lot->addChild("title", $title);      
  				//--          
  				$lotMO=$Meta->getLotMetaOptions($the_query->post);
  				foreach($lotMO as $mo) { 					
  					$lot->addChild($mo->optName, $Meta->getMetaValue($the_query->post, $mo->optName) );	
  				}
- 				$lot->addChild("images")->addChild("img", "qrc:/LOTS/".$imgName);            
+ 				$lot->addChild("images")->addChild("img", "".$imgName);            
  			}            
  			wp_reset_postdata(); 
  		}        
