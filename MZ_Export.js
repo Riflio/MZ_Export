@@ -29,8 +29,7 @@ jQuery(document).ready(function($) {
 					$("#vkwp").find('.percent').html(Math.round(data.step/data.total*100)+'%'+' '+data.step+' of '+data.total);
 					$("#vkwp").find('.bar').css("width", Math.round(data.step/data.total*100)+'%');
 
-					if (data.step>=data.total) {
-						alert("Result: "+data.resultpath);
+					if (data.step>=data.total) {						
 						$('#exportaction').removeClass("start");
 						$('#exportaction').addClass("download");
 						$('#exportaction').attr("href", data.resultpath);

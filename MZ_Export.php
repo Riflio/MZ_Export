@@ -105,10 +105,9 @@ class MZ_export {
  				//--         
  				if (has_post_thumbnail($the_query->post->ID)) {      
 	 				$pti=get_post_thumbnail_id($the_query->post->ID);                
-	 				$md=wp_get_attachment_metadata($pti);                
-	 				$sImg=$md["file"];
-	 				$imgName="img".$imgIndx.".jpg";                
-	 				$zip->addFile($updir['basedir']."/".$sImg, $imgName);
+	 				$md=wp_get_attachment_metadata($pti);      
+	 				$imgName="img".$imgIndx.".jpg"; //TODO: Добавить определение формата/расширение файла картинки               
+	 				$zip->addFile($updir['basedir']."/".$md["file"], $imgName);
  				}                
  				//--                
  				$lot=$xml->addChild('lot');                
@@ -120,8 +119,8 @@ class MZ_export {
  				$lot->addChild("title", "<![CDATA[".$title."]]>");      
  				//--          
  				$lotMO=$Meta->getLotMetaOptions($the_query->post);
- 				foreach($lotMO as $mo) {
- 					$lot->addChild($mo->optName, $Meta->getMetaValue($post, $mo->optName) );	
+ 				foreach($lotMO as $mo) { 					
+ 					$lot->addChild($mo->optName, $Meta->getMetaValue($the_query->post, $mo->optName) );	
  				}
  				$lot->addChild("images")->addChild("img", "qrc:/LOTS/".$imgName);            
  			}            
@@ -131,8 +130,8 @@ class MZ_export {
  		$zip->close();
  		
  		$export->status="SUCCES";
- 		$export->step=10;
- 		$export->total=10;
+ 		$export->step=1;
+ 		$export->total=1;
  		$export->resultpath=$updir['baseurl']."/".$filename;
  		
  		echo json_encode($export);	
