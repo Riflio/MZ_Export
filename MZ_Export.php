@@ -115,7 +115,7 @@ class MZ_export {
  				$lot->addChild("id", $imgIndx);               
  				$title=$the_query->post->post_title;									
  				$descr=$the_query->post->post_content;     
- 				preg_match_all("/[а-яА-Яa-zA-ZёЁ\d\s\.\-\(\)\?\!\\:,]+/gi", $descr, $descr, PREG_SET_ORDER); //-- берём только текст и нужные символы.       
+ 				preg_match_all("/[а-яА-Яa-zA-ZёЁ\d\s\.\-\(\)\?\!\\:,]+/i", $descr, $descr, PREG_SET_ORDER); //-- берём только текст и нужные символы.       
  				$lot->addChild("description", $descr[0]);				
  				$lot->addChild("title", $title);      
  				//--          
