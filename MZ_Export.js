@@ -3,7 +3,9 @@ jQuery(document).ready(function($) {
 
 	$('#exportaction').bind('click', function() {
 		if ($(this).hasClass("start")) {
-			exportAction({'step':0, 'total': 10 });
+			$(this).text("During...");
+			$(this).prop('disabled', true);
+			exportAction({'step':0, 'total': 10 });			
 		}
 		if ($(this).hasClass("download")) {
 			var a = window.open($(this).attr("href"), "_blank", "");	
@@ -34,6 +36,7 @@ jQuery(document).ready(function($) {
 						$('#exportaction').addClass("download");
 						$('#exportaction').attr("href", data.resultpath);
 						$('#exportaction').text("Download");
+						$('#exportaction').prop('disabled', false);
 					}
 				}	
 		});
