@@ -116,7 +116,7 @@ class MZ_export {
  				$title=$the_query->post->post_title;									
  				$descr=strip_tags(nl2br(str_replace(array("&nbsp;", "&#13;", "&#10;"), " ", $the_query->post->post_content)));     
  				 
- 				$lot->addChild("description", $descr );				
+ 				$lot->addChild("description", $descr );			 	
  				$lot->addChild("title", $title);      
  				//--          
  				$lotMO=$Meta->getLotMetaOptions($the_query->post);
