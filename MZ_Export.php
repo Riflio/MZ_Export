@@ -114,10 +114,9 @@ class MZ_export {
  				$lot->addAttribute("gid", $keyIndx);                
  				$lot->addChild("id", $imgIndx);               
  				$title=$the_query->post->post_title;									
- 				$descr=$the_query->post->post_content;     
- 				preg_match_all("/[а-яА-Яa-zA-ZёЁ\d\s\.\-\(\)\?\!\:,]+/u", $descr, $rdescr); //-- берём только текст и нужные символы.       
-var_dump($rdescr[0]);
- 				$lot->addChild("description", implode(" ", $rdescr[0]) );				
+ 				$descr=strip_tags($the_query->post->post_content);     
+ 				
+ 				$lot->addChild("description", $descr );				
  				$lot->addChild("title", $title);      
  				//--          
  				$lotMO=$Meta->getLotMetaOptions($the_query->post);
