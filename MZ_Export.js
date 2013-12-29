@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
 	$('#exportaction').bind('click', function() {
 		if ($(this).hasClass("start")) {
 			$(this).text("During...");
-			$(this).prop('disabled', true);
+			$(this).addClass('button-disabled');
 			exportAction({'step':0, 'total': 10 });			
 		}
 		if ($(this).hasClass("download")) {
@@ -36,7 +36,7 @@ jQuery(document).ready(function($) {
 						$('#exportaction').addClass("download");
 						$('#exportaction').attr("href", data.resultpath);
 						$('#exportaction').text("Download");
-						$('#exportaction').prop('disabled', false);
+						$('#exportaction').removeClass('button-disabled');
 					}
 				}	
 		});
