@@ -85,7 +85,7 @@ class MZ_export {
  			$item->addChild("x");            
  			$item->addChild("y");            
  			$item->addChild("w");            
- 			$item->addChild("title", "<![CDATA[".$menu_item->title."]]>");            
+ 			$item->addChild("title", $menu_item->title);            
  			$item->addChild("gid", $keyIndx);            
  			//--            
  			$the_query = new WP_Query(array(                
@@ -114,8 +114,8 @@ class MZ_export {
  				$lot->addAttribute("gid", $keyIndx);                
  				$lot->addChild("id", $imgIndx);               
  				$title=$the_query->post->post_title;									
- 				$descr=strip_tags($the_query->post->post_content);     
- 				
+ 				$descr=strip_tags(nl2br($the_query->post->post_content));     
+ 				 
  				$lot->addChild("description", $descr );				
  				$lot->addChild("title", $title);      
  				//--          
