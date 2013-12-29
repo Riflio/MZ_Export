@@ -120,7 +120,7 @@ class MZ_export {
  				$lot->addChild("title", $title);      
  				//--          
  				$lotMO=$Meta->getLotMetaOptions($the_query->post);
- 				foreach($lotMO as $mo) { 					
+ 				foreach($lotMO as $mo) { 			 		
  					$lot->addChild($mo->optName, $Meta->getMetaValue($the_query->post, $mo->optName) );	
  				}
  				$lot->addChild("images")->addChild("img", "".$imgName);            
