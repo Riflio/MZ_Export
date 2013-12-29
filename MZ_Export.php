@@ -115,7 +115,7 @@ class MZ_export {
  				$lot->addChild("id", $imgIndx);               
  				$title=$the_query->post->post_title;									
 
- 				$descr=strip_tags(nl2br($the_query->post->post_content));      			 
+ 				$descr=strip_tags(nl2br(html_entity_decode($the_query->post->post_content)));      			 
  				$lot->addChild("description", $descr );	 	
  				
 			
