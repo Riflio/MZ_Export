@@ -109,7 +109,7 @@ class MZ_export {
 	 				$imgName="img".$imgIndx.".jpg"; //TODO: Добавить определение формата/расширение файла картинки               
 	 				$zip->addFile($updir['basedir']."/".$md["file"], $imgName);
  				}                
- 				//--                
+ 				//--                 
  				$lot=$xml->addChild('lot');                
  				$lot->addAttribute("gid", $keyIndx);                
  				$lot->addChild("id", $imgIndx);               
