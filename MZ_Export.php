@@ -106,7 +106,7 @@ class MZ_export {
  				if (has_post_thumbnail($the_query->post->ID)) {      
 	 				$pti=get_post_thumbnail_id($the_query->post->ID);                
 	 				$md=wp_get_attachment_metadata($pti);      
-	 				$imgName="img".$imgIndx.".jpg"; //TODO: Добавить определение формата/расширение файла картинки               
+	 				$imgName="img".$imgIndx.".jpg"; 
 	 				//$zip->addFile($updir['basedir']."/".$md["file"], $imgName);
 	 				
 	 				$imgFileName=$updir['basedir']."/".substr($md["file"], 0, strrpos($md["file"], "/")+1 ).$md["sizes"]["medium"]["file"];
