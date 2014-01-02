@@ -109,7 +109,7 @@ class MZ_export {
 	 				$imgName="img".$imgIndx.".jpg"; //TODO: Добавить определение формата/расширение файла картинки               
 	 				//$zip->addFile($updir['basedir']."/".$md["file"], $imgName);
 	 				
-	 				$imgFileName=$updir['basedir']."/".$md["sizes"]["medium"]["file"];
+	 				$imgFileName=$updir['basedir']."/".substr($md["file"], 0, strrpos($md["file"], "/")+1 ).$md["sizes"]["medium"]["file"];
 					
 	 				if ($md["sizes"]["medium"]['mime-type']=="image/png") {
 	 					$image = imagecreatefrompng($imgFileName);
