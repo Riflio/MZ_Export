@@ -107,7 +107,24 @@ class MZ_export {
 	 				$pti=get_post_thumbnail_id($the_query->post->ID);                
 	 				$md=wp_get_attachment_metadata($pti);      
 	 				$imgName="img".$imgIndx.".jpg"; //TODO: Добавить определение формата/расширение файла картинки               
-	 				$zip->addFile($updir['basedir']."/".$md["file"], $imgName);
+	 				//$zip->addFile($updir['basedir']."/".$md["file"], $imgName);
+	 				
+	 				$imgFileName=$updir['basedir']."/".$md["sizes"]["medium"]["file"];
+					
+	 				if ($md["sizes"]["medium"]['mime-type']=="image/png") {
+	 					$image = imagecreatefrompng($imgFileName);
+	 					$bg = imagecreatetruecolor(imagesx($image), imagesy($image));
+	 					imagefill($bg, 0, 0, imagecolorallocate($bg, 255, 255, 255));
+	 					imagealphablending($bg, TRUE);
+	 					imagecopy($bg, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
+	 					imagedestroy($image);
+	 					$quality = 80;
+	 					$imgFileName.=".jpg";
+	 					imagejpeg($bg, $imgFileName, $quality);
+	 					ImageDestroy($bg);	 					
+	 				} 
+	 				
+	 				$zip->addFile($imgFileName, $imgName);
  				}                
  				//--                  
  				$lot=$xml->addChild('lot');                
